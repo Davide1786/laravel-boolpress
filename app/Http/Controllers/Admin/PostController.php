@@ -39,6 +39,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // Per prima cosa valido i dati che arrivano dal form
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required'
+        ]);
+
         $form_data = $request->all();
 
         $new_post = new Post();
@@ -105,6 +111,11 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required'
+        ]);
+        
         $form_data = $request->all();
         // Verifico se il titolo ricevuto dal from è diverso dal vecchio titolo
         if ($form_data['title'] != $post->title) {
