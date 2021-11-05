@@ -26,4 +26,5 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')
     ->group(function() {
         // pagina di atterraggio dopo il login (cn il prefix, l'url è /admin)
         Route::get('/', 'HomeController@index')->name('index');
+        Route::resource('/posts', 'PostController');
     });
