@@ -47,6 +47,7 @@ class PostController extends Controller
         // dopo aver importato use posso usare il metodo Str che mi richiama il title
         $slug = Str::slug($new_post->title);
 
+        
         $slug_presente = Post::where('slug', $slug)->first();
 
         $contatore = 1;
@@ -84,34 +85,58 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        if (!$post) {
+            abort(404);
+        }
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $form_data = $request->all();
+        // Verifico se il titolo ricevuto dal from è diverso dal vecchio titolo
+        if ($form_data['title'] != $post->title) {
+            // è stato modificato il titolo, quindi devo modificare anche lo slug
+            $slug = Str::slug($form_data['title']);
+
+            $slug_presente = Post::where('slug', $slug)->first();
+
+            $contatore = 1;
+            while($slug_presente) {
+                $slug = $slug . '-' . $contatore;
+                $slug_presente = Post::where('slug', $slug)->first();
+                $contatore++;
+            }
+
+            $form_data['slug'] = $slug;
     }
+    $post->update($form_data);
+
+    return redirect()->route('admin.posts.index')->with('updated', 'Post correttamente modificato');
+}
+
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index')->with('deleted', 'Post correttamente eliminato');
     }
 }

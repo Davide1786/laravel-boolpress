@@ -11,6 +11,13 @@
                 <div class="card-body">
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                   <a href="{{ route('admin.posts.show', $post->id ) }}" class="btn btn-primary">Vai al dettaglio</a>
+                  <a href="{{ route('admin.posts.edit', $post->id ) }}" class="btn btn-dark">Modifica Post</a>
+                  <form action="{{ route('admin.posts.destroy', $post->id ) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
+                  {{-- <a href="{{ route('admin.posts.destroy', $post->id ) }}" class="btn btn-danger">Delete</a> --}}
                 </div>
             </div>
         @endforeach
