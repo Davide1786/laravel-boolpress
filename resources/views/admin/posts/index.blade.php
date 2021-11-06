@@ -7,7 +7,6 @@
       <div class="col-12">
         <ul>
           @foreach ($posts as $post)
-              {{-- <li><a href="{{ route('admin.posts.show', $post->id)}}">{{ $post->title }}</a></li> --}}
               <div class="card">
                   <div class="card-header">
                     {{$post->title}}
@@ -21,12 +20,12 @@
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
-                    {{-- <a href="{{ route('admin.posts.destroy', $post->id ) }}" class="btn btn-danger">Delete</a> --}}
                   </div>
               </div>
           @endforeach
         </ul>
       </div>
+    </div>
     </div>
   </div>
     

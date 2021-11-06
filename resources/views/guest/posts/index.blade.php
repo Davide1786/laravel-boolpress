@@ -3,17 +3,21 @@
 @section('content')
 
 @foreach ($posts as $post)
-{{-- <li><a href="{{ route('admin.posts.show', $post->id)}}">{{ $post->title }}</a></li> --}}
 <div class="card">
     <div class="card-header">
       {{$post->title}}
     </div>
     <div class="card-body">
-      {{-- <p class="card-text">{{$post->content}}</p> --}}
-      <a href="{{ route('posts.show', $post->id )}}" class="btn btn-danger">Dettaglio</a>
-      <a href="{{route('index')}}" class="btn btn-primary">Torna alla home</a>
+      <a href="{{ route('posts.show', $post->id )}}" class="btn btn-primary">Dettaglio</a>
     </div>
 </div>
 @endforeach
+{{-- <div class="container">
+  <div class="row">
+    <div class="col-12">
+      <a href="{{route('index')}}" class="btn btn-primary">Torna alla home</a>
+    </div>
+  </div>
+</div> --}}
     
 @endsection

@@ -24,7 +24,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Conferma Modifica</button>
-        <a href="{{ route('admin.posts.index', $post->id ) }}" class="btn btn-primary">Torna alla lista</a>
+        <a href="{{ route('admin.posts.index', $post->id ) }}" class="btn btn-primary">Annulla modifica</a>
 
       </form>
     </div>

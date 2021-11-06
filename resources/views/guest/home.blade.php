@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Boolpress</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -68,7 +68,8 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('admin.posts.index') }}">Profilo Utente</a>
+                        {{-- <a href="{{ url('/home') }}">Home</a> --}}
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -81,11 +82,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Blog Boolpress | sono home
+                    Blog Boolpress
                 </div>
 
                 <div class="links">
-                    {{-- <a href="#">Tutti i Post</a> --}}
                     <a href="{{ route('posts.index') }}">Tutti i Post</a>
                 </div>
             </div>
