@@ -1,8 +1,11 @@
 @extends('layouts.dashboard')
 
-@section('content')          
+@section('content') 
 
-    <form action="{{ route('admin.posts.update', $post->id) }}" method="post">
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form action="{{ route('admin.posts.update', $post->id) }}" method="post">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -21,5 +24,12 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Conferma Modifica</button>
+        <a href="{{ route('admin.posts.index', $post->id ) }}" class="btn btn-primary">Torna alla lista</a>
+
       </form>
+    </div>
+  </div>
+</div>
+
+
 @endsection
