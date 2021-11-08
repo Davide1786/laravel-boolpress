@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str; // Richiamo lo slug
 use App\Post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -28,7 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -42,7 +44,8 @@ class PostController extends Controller
         // Per prima cosa valido i dati che arrivano dal form
         $request->validate([
             'title' => 'required|max:255',
-            'content' => 'required'
+            'content' => 'required',
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
         $form_data = $request->all();
@@ -75,7 +78,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
@@ -99,7 +102,10 @@ class PostController extends Controller
         if (!$post) {
             abort(404);
         }
-        return view('admin.posts.edit', compact('post'));
+
+        $categories = Category::all();
+
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
