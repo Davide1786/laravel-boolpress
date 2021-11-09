@@ -14,7 +14,11 @@
                         <small>Lo slug è: {{$post->slug}}</small>
                     </div>
                     <div class="test">
-                        <small>Categoria di appartenenza: <a href="{{ route('admin.categories.show', $post->category->id) }}">{{$post->slug}}</a></small>
+                        @if ($post->category)
+                            <small>Categoria di appartenenza: <a href="{{ route('admin.categories.show', $post->category->id) }}">{{$post->slug}}</a></small>
+                        @else
+                            <small>Nessuna categoria di appartenenza</small>
+                        @endif
                     </div>
                     <a href="{{ route('admin.posts.index', $post->id ) }}" class="btn btn-primary">Torna alla lista dei post</a>
                     <a href="{{ route('admin.categories.index') }}" class="btn btn-primary">Torna alle categorie</a>
